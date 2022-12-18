@@ -30,7 +30,17 @@ class ProductoListado(generics.ListAPIView):
     def get_queryset(self):
         return Producto.objects.all()
 
-
 class ProductoCrear(generics.CreateAPIView):
     serializer_class = ProductoSerializer
-   
+
+
+class ProductoEditar(generics.RetrieveUpdateAPIView):
+    serializer_class = ProductoSerializer
+    def get_queryset(self):
+        return Producto.objects.all()
+
+
+class ProductoEliminar(generics.DestroyAPIView):
+    serializer_class = ProductoSerializer
+    def get_queryset(self):
+        return Producto.objects.all()
