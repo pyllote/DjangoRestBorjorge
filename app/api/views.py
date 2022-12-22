@@ -3,8 +3,8 @@ from django.shortcuts import render
 #--Realizamos la importación
 
 from rest_framework import generics
-from .models import Producto
-from .serializers import ProductoSerializer
+from .models import Producto, Categoria, SubCategoria
+from .serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer
 
 # Create your views here.
 
@@ -21,6 +21,28 @@ class ProductoList(generics.ListCreateAPIView):
 class ProductoDetalle(generics.RetrieveDestroyAPIView):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+
+
+class CategoriaList(generics.ListCreateAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+ 
+#class SubCategoriaList(generics.ListCreateAPIView):
+#    queryset = SubCategoria.objects.all()
+#    serializer_class = SubCategoriaSerializer
+
+
+class CategoriaDetalle(generics.RetrieveDestroyAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+    
+class SubCategoriaList(generics.ListCreateAPIView):
+    def get_queryset(self):
+        queryset = SubCategoria.objects.filter(categoria_id=self.kwargs["pk"])
+        return queryset
+    serializer_class = SubCategoriaSerializer
+
+
 
 
 #--Aqui usamos lo de Santa Cruz
