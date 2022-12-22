@@ -1,7 +1,13 @@
 from django.urls import path
 
+from rest_framework.routers import DefaultRouter
+
 from app.api.views import ProductoList, ProductoDetalle, ProductoListado, ProductoCrear,\
-    ProductoEditar, ProductoEliminar, CategoriaList, SubCategoriaList, CategoriaDetalle
+    ProductoEditar, ProductoEliminar, CategoriaList, SubCategoriaList, CategoriaDetalle, ProductoViewSet
+
+
+router = DefaultRouter()
+router.register('v1/productos', ProductoViewSet)
 
 urlpatterns = [
      # url de borjorge
@@ -25,3 +31,5 @@ urlpatterns = [
     path('santacruz/v2/productos/editar/<int:pk>', ProductoEditar.as_view(),name='productoeditar' ),
     path('santacruz/v2/productos/eliminar/<int:pk>', ProductoEliminar.as_view(),name='productoeliminar' ),
 ]
+
+urlpatterns += router.urls

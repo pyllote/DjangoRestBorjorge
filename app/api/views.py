@@ -3,6 +3,7 @@ from django.shortcuts import render
 #--Realizamos la importación
 
 from rest_framework import generics
+from rest_framework import viewsets 
 from .models import Producto, Categoria, SubCategoria
 from .serializers import ProductoSerializer, CategoriaSerializer, SubCategoriaSerializer
 
@@ -66,3 +67,10 @@ class ProductoEliminar(generics.DestroyAPIView):
     serializer_class = ProductoSerializer
     def get_queryset(self):
         return Producto.objects.all()
+
+
+##### TRABAJAMOS CON LOS VIEWSET -video de borjorge nro 58
+
+class ProductoViewSet(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
